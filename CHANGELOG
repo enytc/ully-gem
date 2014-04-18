@@ -1,3 +1,7 @@
+v0.1.1:
+  date: 2014-04-17
+  changes:
+    - Adding support for new Ully API
 v0.1.0:
   date: 2014-04-2
   changes:
