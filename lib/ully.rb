@@ -37,7 +37,7 @@ module Ully
         response = self.class.post("/forgot/access_token", :body => {:email => email, :password => password})
         json_response = JSON.parse(response.body)
         config = json_response["response"]
-        if config.has_key?("access_token") && config.has_key?("permissions")
+        if config.has_key?("access_token") && config.has_key?("role")
             File.open("ullyConfig.yml", "w"){ |f| f << config.to_yaml }
             puts "Logged successfully!"
         else
@@ -49,7 +49,7 @@ module Ully
     def logged_in?
         if File.exist?("ullyConfig.yml")
             config = YAML.load_file("ullyConfig.yml")
-            if config.has_key?("access_token") && config.has_key?("permissions")
+            if config.has_key?("access_token") && config.has_key?("role")
                 true
             else
                 false
@@ -57,18 +57,6 @@ module Ully
         else
             false
         end
-    end
-
-    # Create accounts
-    def signup(name, email, username, password, format=false)
-        response = self.class.post("/signup", :body => {:name => name, :email => email, :username => username, :password => password})
-        self.class.pretty_response(response, format)
-    end
-
-    # Forgot password
-    def forgot(email, username, format=false)
-        response = self.class.post("/forgot", :body => {:email => email, :username => username})
-        self.class.pretty_response(response, format)
     end
 
     # Stats of Ully
