@@ -1,4 +1,4 @@
-# Ully [![Build Status](https://secure.travis-ci.org/enytc/ully-gem.png?branch=master)](http://travis-ci.org/enytc/ully-gem) [![GEM version](https://badge-me.herokuapp.com/api/gem/ully.png)](http://badges.enytc.com/for/gem/ully)
+# Ully [![Build Status](https://secure.travis-ci.org/ullyin/ully-gem.png?branch=master)](http://travis-ci.org/ullyin/ully-gem) [![GEM version](https://badge-me.herokuapp.com/api/gem/ully.png)](http://badges.enytc.com/for/gem/ully)
 
 > Ruby Gem for abstracting the use of Ully API
 
@@ -31,39 +31,6 @@ api = Ully::Client.new("access_token")
 ```
 
 ## Documentation
-
-#### #login(email, password)
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
-
-
-The `login` method is responsible to login in accounts
-
-How to use this method
-
-```ruby
-
-api.login("email", "123456test")
-```
-
-#### #logged_in?
-
-The `logged_in?` method is responsible to check if user is logged in
-
-How to use this method
-
-```ruby
-
-api.logged_in?
-```
 
 #### #stats(format=false)
 
@@ -121,7 +88,7 @@ How to use this method
 api.status("yaml")
 ```
 
-#### #me(format=false)
+#### #account(format=false)
 
 
 **Parameter**: `format`
@@ -129,16 +96,16 @@ api.status("yaml")
 **Example**: `"yaml"`
 
 
-The `me` method is responsible for showing profile info
+The `account` method is responsible for showing profile info
 
 How to use this method
 
 ```ruby
 
-api.me("yaml")
+api.account("yaml")
 ```
 
-#### #update_me(current_password, name="", email="", username="", password="", format=false)
+#### #update_account(current_password, name="", email="", username="", password="", format=false)
 
 
 **Parameter**: `current_password`
@@ -171,30 +138,13 @@ api.me("yaml")
 **Example**: `yaml`
 
 
-The `update_me` method is responsible for update profile info
+The `update_account` method is responsible for update profile info
 
 How to use this method
 
 ```ruby
 
-api.update_me("123456test", "myname", "email", "myusername", "123456test", "yaml")
-```
-
-#### #delete_me(format=false)
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `delete_me` method is responsible for delete profile info
-
-How to use this method
-
-```ruby
-
-api.delete_me("yaml")
+api.update_account("123456test", "myname", "email", "myusername", "123456test", "yaml")
 ```
 
 #### #collections(format=false)
@@ -435,14 +385,14 @@ api.delete_urls("collection_Slug", "url_id")
 
 ## Contributing
 
-1. Fork it [enytc/ully-gem](https://github.com/enytc/ully-gem/fork)
+1. Fork it [ullyin/ully-gem](https://github.com/ullyin/ully-gem/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am "Add some feature"`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
 ## Support
-If you have any problem or suggestion please open an issue [here](https://github.com/enytc/ully-gem/issues).
+If you have any problem or suggestion please open an issue [here](https://github.com/ullyin/ully-gem/issues).
 
 ## License
 

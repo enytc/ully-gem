@@ -5,7 +5,7 @@ require "json"
 require "yaml"
 
 # ully-gem
-# https://github.com/enytc/ully-gem
+# https://github.com/ullyin/ully-gem
 #
 # Copyright (c) 2014, EnyTC Corporation
 # Licensed under the BSD license.
@@ -32,33 +32,6 @@ module Ully
         end
     end
 
-    # Login in user account
-    def login(email, password)
-        response = self.class.post("/forgot/access_token", :body => {:email => email, :password => password})
-        json_response = JSON.parse(response.body)
-        config = json_response["response"]
-        if config.has_key?("access_token") && config.has_key?("role")
-            File.open("ullyConfig.yml", "w"){ |f| f << config.to_yaml }
-            puts "Logged successfully!"
-        else
-            puts "Login failed. Try again!"
-        end
-    end
-
-    # Check if user is logged
-    def logged_in?
-        if File.exist?("ullyConfig.yml")
-            config = YAML.load_file("ullyConfig.yml")
-            if config.has_key?("access_token") && config.has_key?("role")
-                true
-            else
-                false
-            end
-        else
-            false
-        end
-    end
-
     # Stats of Ully
     def stats(format=false)
         response = self.class.get("/stats")
@@ -78,20 +51,14 @@ module Ully
     end
 
     # Show profile info
-    def me(format=false)
-        response = self.class.get("/me")
+    def account(format=false)
+        response = self.class.get("/account")
         self.class.pretty_response(response, format)
     end
 
     # Update profile info
-    def update_me(current_password, name="", email="", username="", password="", format=false)
-        response = self.class.put("/me", :body => {:name => name, :email => email, :username => username, :currentpassword => current_password, :password => password})
-        self.class.pretty_response(response, format)
-    end
-
-    # Delete profile info
-    def delete_me(format=false)
-        response = self.class.delete("/me")
+    def update_account(current_password, name="", email="", username="", password="", format=false)
+        response = self.class.put("/account", :body => {:name => name, :email => email, :username => username, :currentpassword => current_password, :password => password})
         self.class.pretty_response(response, format)
     end
 

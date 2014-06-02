@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["chris.enytc@gmail.com"]
   spec.summary       = %q{Ruby Gem for abstracting the use of Ully API.}
   spec.description   = %q{Ruby Gem for abstracting the use of Ully API. Manage your favorite links easily and quickly on Ully.}
-  spec.homepage      = "https://github.com/enytc/ully-gem"
+  spec.homepage      = "https://github.com/ullyin/ully-gem"
   spec.license       = "BSD"
 
   spec.files         = `git ls-files -z`.split("\x0")
