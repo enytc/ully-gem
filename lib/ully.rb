@@ -13,7 +13,7 @@ require "yaml"
 module Ully
   class Client
     include HTTParty
-    base_uri ENV["ULLY_URI"] || "https://ully.in/api"
+    base_uri ENV["ULLY_URI"] || "https://ully.in/api/"
 
     def initialize(access_token)
         self.class.default_params :access_token => access_token
@@ -38,12 +38,6 @@ module Ully
         self.class.pretty_response(response, format)
     end
 
-    # Stats of Ully
-    def stats_by_username(username, format=false)
-        response = self.class.get("/stats/"+username)
-        self.class.pretty_response(response, format)
-    end
-
     # Status of Ully API
     def status(format=false)
         response = self.class.get("/status")
@@ -56,57 +50,33 @@ module Ully
         self.class.pretty_response(response, format)
     end
 
-    # Update profile info
-    def update_account(current_password, name="", email="", username="", password="", format=false)
-        response = self.class.put("/account", :body => {:name => name, :email => email, :username => username, :currentpassword => current_password, :password => password})
-        self.class.pretty_response(response, format)
-    end
-
     # Show collections
     def collections(format=false)
-        response = self.class.get("/collections", :query => {:fields => "name,slug,urls,public"})
+        response = self.class.get("/collections")
         self.class.pretty_response(response, format)
     end
 
-    # Show collections by username
-    def collections_by_username(username, format=false)
-        response = self.class.get("/collections/of/"+username, :query => {:fields => "name,slug,urls,public"})
-        self.class.pretty_response(response, format)
-    end
-
-    # Create collections
-    def create_collections(name, slug, public_collection=true, format=false)
+    # Create collection
+    def create_collection(name, slug, public_collection=true, format=false)
         response = self.class.post("/collections", :body => {:name => name, :slug => slug, :public => public_collection})
         self.class.pretty_response(response, format)
     end
 
-    # Update collections
-    def update_collections(collection_slug, name="", slug="", public_collection=true, format=false)
-        response = self.class.put("/collections/"+collection_slug, :body => {:name => name, :slug => slug, :public => public_collection})
+    # Add url
+    def add_url(collection_slug, url, title="", description="", format=false)
+        response = self.class.post("/collections/urls", :body => {:title => title, :url => url, :description => description, :slug => collection_slug})
         self.class.pretty_response(response, format)
     end
 
-    # Delete collections
-    def delete_collections(collection_slug, format=false)
-        response = self.class.delete("/collections/"+collection_slug)
+    # Show shortened urls
+    def shortened_urls(format=false)
+        response = self.class.get("/shortener")
         self.class.pretty_response(response, format)
     end
 
-    # Create urls
-    def create_urls(collection_slug, url, title="", description="", format=false)
-        response = self.class.post("/collections/"+collection_slug+"/urls", :body => {:title => title, :url => url, :description => description})
-        self.class.pretty_response(response, format)
-    end
-
-    # Update urls
-    def update_urls(collection_slug, url_id, url, title="", description="", format=false)
-        response = self.class.put("/collections/"+collection_slug+"/urls/"+url_id, :body => {:title => title, :url => url, :description => description})
-        self.class.pretty_response(response, format)
-    end
-
-    # Delete urls
-    def delete_urls(collection_slug, url_id, format=false)
-        response = self.class.delete("/collections/"+collection_slug+"/urls/"+url_id)
+    # Shorten url
+    def shorten_url(url, shortcode="", password="", format=false)
+        response = self.class.post("/shortener/", :body => {:url => url, :shortcode => shortcode, :password => password})
         self.class.pretty_response(response, format)
     end
   end

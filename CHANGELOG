@@ -1,3 +1,8 @@
+v0.4.0:
+  date: 2014-11-21
+  changes:
+    - Adding support for new Ully API
+    - Adding support for shortener
 v0.3.0:
   date: 2014-06-1
   changes:

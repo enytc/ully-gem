@@ -49,28 +49,6 @@ How to use this method
 api.stats("yaml")
 ```
 
-#### #stats_by_username(username, format=false)
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `"yaml"`
-
-
-The `stats` method is responsible for showing statistics of Ully
-
-How to use this method
-
-```ruby
-
-api.stats("myusername", "yaml")
-```
-
 #### #status(format=false)
 
 
@@ -105,48 +83,6 @@ How to use this method
 api.account("yaml")
 ```
 
-#### #update_account(current_password, name="", email="", username="", password="", format=false)
-
-
-**Parameter**: `current_password`
-**Type**: `String`
-**Example**: `123456test`
-
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `myname`
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `update_account` method is responsible for update profile info
-
-How to use this method
-
-```ruby
-
-api.update_account("123456test", "myname", "email", "myusername", "123456test", "yaml")
-```
-
 #### #collections(format=false)
 
 
@@ -164,12 +100,76 @@ How to use this method
 api.collections("yaml")
 ```
 
-#### #collections_by_username(username, format=false)
+#### #create_collection(name, slug, public_collection, format=false)
 
 
-**Parameter**: `username`
+**Parameter**: `name`
 **Type**: `String`
-**Example**: `myusername`
+**Example**: `My Favorites`
+
+
+**Parameter**: `slug`
+**Type**: `String`
+**Example**: `favorites`
+
+
+**Parameter**: `public_collection`
+**Type**: `Boolean`
+**Example**: `true`
+
+
+**Parameter**: `format`
+**Type**: `String`
+**Example**: `yaml`
+
+
+The `create_collection` method is responsible for create a new collection
+
+How to use this method
+
+```ruby
+
+api.create_collection("name", "slug", true, "yaml")
+```
+
+#### #add_url(collection_slug, url, title="", description="", format=false)
+
+
+**Parameter**: `collectionSlug`
+**Type**: `String`
+**Example**: `favorites`
+
+
+**Parameter**: `title`
+**Type**: `String`
+**Example**: `Title of url`
+
+
+**Parameter**: `url`
+**Type**: `String`
+**Example**: `http://example.com`
+
+
+**Parameter**: `description`
+**Type**: `String`
+**Example**: `My example page`
+
+
+**Parameter**: `format`
+**Type**: `String`
+**Example**: `yaml`
+
+
+The `add_url` method is responsible for create a new url
+
+How to use this method
+
+```ruby
+
+api.add_url("collection_slug", "http://example.com", "Title of url", "My example page", "yaml")
+```
+
+#### #shortened_urls(format=false)
 
 
 **Parameter**: `format`
@@ -177,127 +177,31 @@ api.collections("yaml")
 **Example**: `"yaml"`
 
 
-The `collections_by_username` method is responsible for list all collections of a specific user
+The `shortened_urls` method is responsible for list all shortened urls
 
 How to use this method
 
 ```ruby
 
-api.collections_by_username("username", "yaml")
+api.shortened_urls("yaml")
 ```
 
-#### #create_collections(name, slug, public_collection, format=false)
-
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `My Favorites`
-
-
-**Parameter**: `slug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `public_collection`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `create_collections` method is responsible for create a new collection
-
-How to use this method
-
-```ruby
-
-api.create_collections("name", "slug", true, "yaml")
-```
-
-#### #update_collections(collection_slug, name="", slug="", public_collection=true, format=false)
-
-
-**Parameter**: `collection_slug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `My Favorites`
-
-
-**Parameter**: `slug`
-**Type**: `String`
-**Example**: `myfavorites`
-
-
-**Parameter**: `public_collection`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `update_collections` method is responsible for update a specific collection
-
-How to use this method
-
-```ruby
-
-api.update_collections("collection_slug", "name", "slug", true, "yaml")
-```
-
-#### #delete_collections(collection_slug, format=false)
-
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `delete_collections` method is responsible for delete a specific collection
-
-How to use this method
-
-```ruby
-
-api.delete_collections("collection_slug", "yaml")
-```
-
-#### #create_urls(collection_slug, url, title, description)
-
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `title`
-**Type**: `String`
-**Example**: `Title of url`
+#### #shorten_url(url, shortcode="", password="", format=false)
 
 
 **Parameter**: `url`
 **Type**: `String`
-**Example**: `http://example.com`
+**Example**: `http://example.com/pages/about/ully`
 
 
-**Parameter**: `description`
+**Parameter**: `shortcode`
 **Type**: `String`
-**Example**: `My example page`
+**Example**: `ully`
+
+
+**Parameter**: `password`
+**Type**: `String`
+**Example**: `12345678`
 
 
 **Parameter**: `format`
@@ -305,82 +209,13 @@ api.delete_collections("collection_slug", "yaml")
 **Example**: `yaml`
 
 
-The `create_urls` method is responsible for create a new url
+The `shorten_url` method is responsible for shorten urls
 
 How to use this method
 
 ```ruby
 
-api.create_urls("collection_slug", "http://example.com", "Title of url", "My example page", "yaml")
-```
-
-#### #update_urls(collection_slug, url_id, url, title="", description="", format=false)
-
-
-**Parameter**: `collection_slug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `url_id`
-**Type**: `String`
-**Example**: `url_id`
-
-
-**Parameter**: `url`
-**Type**: `String`
-**Example**: `http://example.com`
-
-
-**Parameter**: `title`
-**Type**: `String`
-**Example**: `Title of url`
-
-
-**Parameter**: `description`
-**Type**: `String`
-**Example**: `My example page`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `update_urls` method is responsible for update a specific url
-
-How to use this method
-
-```ruby
-
-api.update_urls("collection_slug", "url_id", "Title of url", "http://example.com", "My example page", "yaml")
-```
-
-#### #delete_urls(collection_slug, url_id)
-
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `urlid`
-**Type**: `String`
-**Example**: `urlid`
-
-
-**Parameter**: `format`
-**Type**: `String`
-**Example**: `yaml`
-
-
-The `delete_Urls` method is responsible for delete a specific url
-
-How to use this method
-
-```ruby
-
-api.delete_urls("collection_Slug", "url_id")
+api.shorten_url("http://example.com/pages/about/ully", "ully", "12345678", "yaml")
 ```
 
 ## Contributing
